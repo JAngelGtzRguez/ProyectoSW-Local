@@ -88,6 +88,16 @@ public class App
             return objetoJson;
         });
 
+        get("/preguntas", (req, res) -> {
+            before((rq, rs) -> rs.type("application/json"));
+            Operaciones dao = new Operaciones();
+            //return gson.toJson(usuarios.values());
+            //System.out.println(dao.listaUsuario().get(0).getEmail());
+            //System.out.println(dao.listaPreguntas());
+
+            return gson.toJson(dao.listaPreguntas());
+        });
+
         
 
         /*

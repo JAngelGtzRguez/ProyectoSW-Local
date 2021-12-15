@@ -8,7 +8,6 @@ btnAgregar.addEventListener("click", function () {
     .then(function (response) {
         alert("mensaje: Pregunta creada "+response.data.status+" con id: "+response.data.id);
         id = response.data.id;
-        idpregunta = id;
         estado=response.data.status;
     })
     .catch(function (error) {

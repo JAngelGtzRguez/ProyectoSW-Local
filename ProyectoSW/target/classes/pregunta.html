@@ -26,7 +26,8 @@
                     <input type="text" name="pregunta" id="pregunta" placeholder="  Pregunta:" class="w-4/5 border">
                 </div>
                 <div class="w-1/3 pl-2 pr-8">            
-                    <select name="tipoPregunta" id="tipoPregunta" class="w-40" onchange="agregarPregutaC();">
+                    <!--<select name="tipoPregunta" id="tipoPregunta" class="w-40" onchange="agregarPregutaC();">-->
+                    <select name="tipoPregunta" id="tipoPregunta" class="w-40">
                         <option value=""></option>
                         <option value="abierta">Pregunta abierta</option>
                         <option value="cerrada">Pregunta cerrada</option>
@@ -38,11 +39,12 @@
             </div>
             <div class="w-auto mt-4 p-2 text-center">
                 <div class="w-full py-2">
-                    <!--<input type="file" name="video" id="video" accept=".mp4"  value="" class="">-->
+                    <input type="file" name="video" id="video" accept=".mp4"  value="" class="">
                     <input type="hidden" id="idCuestionario"   value="1">
                 </div>
                 <div class="w-full mt-4 ml-56 mb-4">
-                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" id="agregar" onclick="mostrarPregunta();"> Agregar </button>
+                    <!--<button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" id="agregar" onclick="mostrarPregunta();"> Agregar </button>-->
+                    <button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" id="agregar"> Agregar </button>
                 </div>
             </div>
         </form>
@@ -52,8 +54,10 @@
 
     </div>
     
-    <script src="crearElemt.js"></script>
+    
+    <!--<script src="crearElemt.js"></script>-->
     <script src="insertar.js"></script>
+    <!--<script src="formulario.js"></script>-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>

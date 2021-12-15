@@ -3,7 +3,10 @@ package mx.uv.BD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -109,6 +112,7 @@ public class Operaciones {
         String msj = "";
         String video = "Ruta video";
         String idC = "1";
+        String tipo = "jejej";
 
         con = conexion.getConnection();
         try {
@@ -116,7 +120,7 @@ public class Operaciones {
             stm = con.prepareStatement(sql);
             stm.setString(1, p.getId());
             stm.setString(2, p.getPregunta());
-            stm.setString(3, p.getTipo());
+            stm.setString(3, tipo);
             stm.setString(4, video);
             stm.setString(5, idC);
 
@@ -138,8 +142,7 @@ public class Operaciones {
                     } catch (URISyntaxException | IOException ex) {}
                 }
             }
-                
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -160,6 +163,48 @@ public class Operaciones {
         return msj;
     }
 
+
+        //************************* BUSCAR PREGUNTA EN BASE DE DATOS ***************************
+        public List<Pregunta> listaPreguntas() {
+            Statement stm = null;
+            ResultSet rs = null;
+            Connection con = null;
+            List<Pregunta> resultado = new ArrayList<>();
+    
+            con = conexion.getConnection();
+            try {
+                String sql = "SELECT * FROM preguntas WHERE idC = 1";
+                stm = con.createStatement();
+                rs = stm.executeQuery(sql);
+                while (rs.next()) {
+                    Pregunta p = new Pregunta(rs.getString("id"), rs.getString("pregunta"), rs.getString("tipo"), rs.getString("video"), rs.getString("idC"));
+                    resultado.add(p);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+            
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException sqlEx) { sqlEx.printStackTrace(); } // ignore
+                    rs = null;
+                }
+                if (stm != null) {
+                    try {
+                        stm.close();
+                    } catch (SQLException sqlEx) { sqlEx.printStackTrace(); } // ignore
+                    stm = null;
+                }
+                try {
+                    con.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return resultado;
+        }
+    
 
 
 

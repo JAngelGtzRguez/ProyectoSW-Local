@@ -40,7 +40,7 @@ function agregarRespuestaCHtml(){
 function mostrarPregunta(){
     var pregunta = document.getElementById('pregunta').value;
     var tipoPreg = document.getElementById('tipoPregunta').value;
-    var video = document.getElementById('video');
+    /*var video = document.getElementById('video');
     var guardarVideo = '';
     $(document).ready(function(){
         $(document).on('change', 'input[type=file]', function(e){
@@ -68,5 +68,5 @@ function mostrarPregunta(){
                                     '<button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" id="agregar" desabled> Agregar </button>'+
                                 '</div>'+
                             '</div>';
-    contenedorPri.appendChild(contenrdorSec);
+    contenedorPri.appendChild(contenrdorSec);*/
 }
