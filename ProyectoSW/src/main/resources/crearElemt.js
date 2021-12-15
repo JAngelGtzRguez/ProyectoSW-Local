@@ -37,3 +37,36 @@ function agregarRespuestaCHtml(){
     }
 }
 
+function mostrarPregunta(){
+    var pregunta = document.getElementById('pregunta').value;
+    var tipoPreg = document.getElementById('tipoPregunta').value;
+    var video = document.getElementById('video');
+    var guardarVideo = '';
+    $(document).ready(function(){
+        $(document).on('change', 'input[type=file]', function(e){
+            tmpPath = URL.createObjectURL(e.target.files[0]);
+            guardarVideo = tmpPath;
+        });
+    });
+
+    const contenedorPri = document.getElementById('contedirPreguntas');
+    const contenrdorSec = document.createElement('div');
+    contenrdorSec.className = 'w-3/6 m-auto border py-4';
+    contenrdorSec.innerHTML = '<div class="flex flex-wrap w-full m-auto">'+
+                                    '<div class="w-2/3 px-4 m-auto">'+
+                                        '<input type="text" name="pregunta" id="pregunta" placeholder="'+pregunta+'" class="w-4/5 border" desabled>'+
+                                    '</div>'+
+                                    '<div class="w-1/3 pl-2 pr-8">'+
+                                        '<label for="" class="w-40">'+tipoPreg+'</label>'+
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="w-auto mt-4 p-2 text-center">'+
+                                    '<div class="w-full py-2">'+
+                                        '<video src="'+guardarVideo+'" controls></video>'+
+                                    '</div>'+
+                                '<div class="w-full mt-4 ml-56 mb-4">'+
+                                    '<button class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded" id="agregar" desabled> Agregar </button>'+
+                                '</div>'+
+                            '</div>';
+    contenedorPri.appendChild(contenrdorSec);
+}
