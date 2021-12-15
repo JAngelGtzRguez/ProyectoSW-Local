@@ -99,21 +99,21 @@
                 </archive>
             </configuration>
         </plugin>
-        <plugin>
+        <!--<plugin>
           <groupId>com.heroku.sdk</groupId>
           <artifactId>heroku-maven-plugin</artifactId>
           <version>3.0.3</version>
           <configuration>
               <jdkVersion>1.8</jdkVersion>
-              <!-- Use your own application name -->
+               Use your own application name 
               <appName>forms-proyect</appName> 
               <processTypes>
-                  <!-- Tell Heroku how to launch your application -->
-                  <!-- You might have to remove the ./ in front   -->
+                   Tell Heroku how to launch your application 
+                   You might have to remove the ./ in front   
                   <web>java -jar ./target/proyecto-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
               </processTypes>
           </configuration>
-      </plugin>
+      </plugin>-->
     </plugins>
   </build>
 </project>

@@ -205,7 +205,7 @@ public class Operaciones {
          
                     if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
                         try {
-                            java.net.URI uri = new java.net.URI("https://uv-forms.herokuapp.com/inicio.html");
+                            java.net.URI uri = new java.net.URI("inicio.html");
                             desktop.browse(uri);
                         } catch (URISyntaxException | IOException ex) {}
                     }
