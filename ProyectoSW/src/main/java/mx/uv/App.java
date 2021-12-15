@@ -80,11 +80,6 @@ public class App
         post("/pregunta", (req, res) -> {
             String payload = req.body();
             String id = UUID.randomUUID().toString();
-
-            Pregunta p = gson.fromJson(payload, Pregunta.class);
-
-            p.setId(id);
-
             Operaciones dao = new Operaciones();
             JsonObject objetoJson = new JsonObject();
             objetoJson.addProperty("status", dao.crearPregunta(p));
