@@ -1,6 +1,6 @@
 var btnAgregar = document.getElementById("agregar");
 btnAgregar.addEventListener("click", function () {
-    axios.post("https://uv-forms.herokuapp.com/pregunta", {
+    axios.post("http://localhost:4567/pregunta", {
         pregunta : document.getElementById("pregunta").value,
         tipo : document.getElementById("tipoPregunta").value
     })
