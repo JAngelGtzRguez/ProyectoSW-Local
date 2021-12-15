@@ -13,6 +13,8 @@ public class Operaciones {
     
     private Conexion conexion = new Conexion();
 
+    //************************* CREAR USUARIO ***************************
+
     public String crearUsuario(Usuario u) {
         PreparedStatement stm = null;
         Connection con = null;
@@ -51,26 +53,92 @@ public class Operaciones {
         return msj;
     }
 
+    //************************* BUSCAR USUARIO EN BASE DE DATOS ***************************
+
+    public void buscarUsuario(String email, String password){
+        Statement stm = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        con = conexion.getConnection();
+        try {
+            String sql = "SELECT * FROM usuarios WHERE email='"+email+"' AND password='"+password+"'";
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            
+            if(rs.next()){
+                System.out.println("Bienvendio Usuario");
+                if (java.awt.Desktop.isDesktopSupported()) {
+                    java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+         
+                    if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+                        try {
+                            java.net.URI uri = new java.net.URI("http://localhost:4567/inicio.html");
+                            desktop.browse(uri);
+                        } catch (URISyntaxException | IOException ex) {}
+                    }
+                }
+            }else{
+                System.out.println("No pudo ingresar");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    //************************* CREAR PREGUNTA EN BASE DE DATOS ***************************
+
     public String crearPregunta(Pregunta p) {
         PreparedStatement stm = null;
         Connection con = null;
         String msj = "";
-
-        String video ="ruta video";
+        String video = "Ruta video";
+        String idC = "1";
 
         con = conexion.getConnection();
         try {
-            String sql = "INSERT INTO preguntas (id, pregunta, tipo, video) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO preguntas (id, pregunta, tipo, video, idC) VALUES (?, ?, ?, ?, ?)";
             stm = con.prepareStatement(sql);
             stm.setString(1, p.getId());
             stm.setString(2, p.getPregunta());
             stm.setString(3, p.getTipo());
             stm.setString(4, video);
+            stm.setString(5, idC);
 
-            if (stm.executeUpdate() > 0)
-                msj = "El usuario fue agregado";
-            else
-                msj = "El usuario no se agrego";
+            if (stm.executeUpdate() > 0){
+                msj = "La pregunta fue agregada";
+                System.out.println("Se agrego la pregunta a la BD");
+            }else{
+                System.out.println("NO se agrego la pregunta a la BD");
+                msj = "El pregunta fue agregada";
+            }
+
+            if (java.awt.Desktop.isDesktopSupported()) {
+                java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+     
+                if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+                    try {
+                        java.net.URI uri = new java.net.URI("http://localhost:4567/pregunta.html");
+                        desktop.browse(uri);
+                    } catch (URISyntaxException | IOException ex) {}
+                }
+            }
+                
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,10 +163,51 @@ public class Operaciones {
 
 
 
+    /*
+    public void crearPregunta(Pregunta p) {
+        PreparedStatement stm = null;
+        Connection con = null;
+        String msj = "";
 
+        String video ="ruta video";
 
+        con = conexion.getConnection();
+        try {
+            String sql = "INSERT INTO preguntas (id, pregunta, tipo, video) VALUES (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, p.getId());
+            stm.setString(2, p.getPregunta());
+            stm.setString(3, p.getTipo());
+            stm.setString(4, video);
 
+            if (stm.executeUpdate() > 0){
+                //msj = "La pregunta fue agregada";
+                System.out.println("Se agrego la pregunta a la BD");
+            }else
+                System.out.println("NO se agrego la pregunta a la BD");
+                //msj = "El pregunta fue agregada";
+            
+               
+        /*
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
+        return msj;
+    }*/
 
     /*
     public List<Usuario> listaUsuario() {
@@ -187,50 +296,7 @@ public class Operaciones {
     }
     */
 
-    public void buscarUsuario(String email, String password){
-        Statement stm = null;
-        ResultSet rs = null;
-        Connection con = null;
-
-        con = conexion.getConnection();
-        try {
-            String sql = "SELECT * FROM usuarios WHERE email='"+email+"' AND password='"+password+"'";
-            stm = con.createStatement();
-            rs = stm.executeQuery(sql);
-            
-            if(rs.next()){
-                System.out.println("Bienvendio Usuario");
-                if (java.awt.Desktop.isDesktopSupported()) {
-                    java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-         
-                    if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
-                        try {
-                            java.net.URI uri = new java.net.URI("inicio.html");
-                            desktop.browse(uri);
-                        } catch (URISyntaxException | IOException ex) {}
-                    }
-                }
-            }else{
-                System.out.println("No pudo ingresar");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (stm != null) {
-                try {
-                    stm.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            try {
-                con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
+    
    
 
 }

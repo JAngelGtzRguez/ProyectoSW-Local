@@ -23,8 +23,6 @@ public class App
     //private static Map<String, Usuario> usuarios = new HashMap<>();
     public static void main( String[] args ) {
 
-        port(getHerokuAssignedPort());
-
         staticFiles.location("/");
 
         options("/*", (request, response) -> {
@@ -80,13 +78,17 @@ public class App
         post("/pregunta", (req, res) -> {
             String payload = req.body();
             String id = UUID.randomUUID().toString();
+            Pregunta p = gson.fromJson(payload, Pregunta.class);
+            p.setId(id);
+
             Operaciones dao = new Operaciones();
             JsonObject objetoJson = new JsonObject();
             objetoJson.addProperty("status", dao.crearPregunta(p));
             objetoJson.addProperty("id", id);
-            //return objetoJson;
-            return new Gson().toJson(objetoJson);
+            return objetoJson;
         });
+
+        
 
         /*
         post("/preguntaC", (req, res) -> {
@@ -107,11 +109,4 @@ public class App
 
     }
 
-    static int getHerokuAssignedPort() {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-        if (processBuilder.environment().get("PORT") != null) {
-            return Integer.parseInt(processBuilder.environment().get("PORT"));
-        }
-        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
-    }
 }

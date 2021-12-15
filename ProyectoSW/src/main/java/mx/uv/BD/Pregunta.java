@@ -5,17 +5,18 @@ public class Pregunta {
     private String pregunta;
     private String tipo;
     private String video;
+    private String idC;
 
 
-    public Pregunta(String id, String pregunta, String tipo, String video) {
+    public Pregunta(String id, String pregunta, String tipo, String video, String idC) {
 
         this.setId(id);
         this.setPregunta(pregunta);
         this.setTipo(tipo);
         this.setVideo(video);
+        this.setIdC(idC);
         
     }
-
 
     public String getId() {
         return id;
@@ -55,5 +56,15 @@ public class Pregunta {
     public void setVideo(String video) {
         this.video = video;
     }
+
+    public String getIdC() {
+        return idC;
+    }
+
+
+    public void setIdC(String idC) {
+        this.idC = idC;
+    }
+
 
 }
