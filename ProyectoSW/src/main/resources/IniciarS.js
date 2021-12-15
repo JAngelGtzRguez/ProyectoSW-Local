@@ -6,3 +6,4 @@ btnBuscar.addEventListener("click", function () {
         password : document.getElementById("password").value
     })
 })
+
