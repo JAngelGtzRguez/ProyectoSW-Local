@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear formulario</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!--Titulo-->
+        <div class="w-3/5 m-auto bg-green-600 my-4">
+            <h1 class="text-4xl text-center text-white">Nuevo cuestionario</h1>
+        </div>
+    </header>
+
+    <!--Crear botones para los modales-->
+    <!--Contenedor para botones-->
+    <div class="flex flex-wrap w-3/6 m-auto py-2">
+        <!--Botón pregunta abierta-->
+        <div class="w-1/2 m-auto text-center py-2">
+            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="document.getElementById('preguntaAbierta').hidden=false;">Pregunta Abierta</button>
+        </div>
+        <!--Botón pregunta cerrada-->
+        <div class="w-1/2 m-auto text-center py-2">
+            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="document.getElementById('preguntaCerrada').hidden=false;">Pregunta Cerrada</button>
+        </div>
+    </div>
+
+    <!--Crear pregunta abierta-->
+    <!--Div contenedor-->
+    <div class="w-3/6 m-auto border py-4" id="preguntaAbierta" hidden>
+        <!--Form para enviar la pregunta a la base de datos-->
+        <form action="http://localhost:4567/pregunta" method="post">
+            <!--Div, primer nivel (input y combobox)-->
+            <div class="flex flex-wrap w-full m-auto">
+                <div class="w-2/3 px-4 m-auto">
+                    <input type="text" name="pregunta" id="pregunta" placeholder="  Pregunta:" class="w-4/5 border">
+                </div>
+                <div class="w-1/3 pl-2 pr-8">
+                    <label class="w-40" for="" id="abierta" value="Preguta Abierta" >Pregunta abierta</label>
+                    <input type="hidden" id="tipo" placeholder="Abierta" class="w-4/5 border" value="Abierta">
+                </div>
+            </div>
+            <!--Div segundo nivel-->
+            <div class="w-auto mt-4 p-2 text-center">
+                <div class="w-full py-2">
+                    <input type="file" name="video" id="video" accept=".mp4"  value="" class="">
+                </div>
+                <div class="w-full mt-4 ml-56 mb-4">
+                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" id="cancelar" onclick="document.getElementById('preguntaAbierta').hidden=true;"> Cancelar </button>
+                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" id="agregar"> Agregar </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!--********************************Crear pregunta cerrada********************************-->
+    <!--Div contenedor-->
+    <div class="w-3/6 m-auto border py-4" id="preguntaCerrada" hidden>
+        <!--Form para enviar la pregunta a la base de datos-->
+        <!--<form action="">-->
+        <form action="http://localhost:4567/preguntaC" method="post">
+            <!--Div, primer nivel (input y combobox)-->
+            <div class="flex flex-wrap w-full m-auto">
+                <div class="w-2/3 px-4 m-auto">
+                    <input type="text" name="pregunta" id="pregunta" placeholder="  Pregunta:" class="w-4/5 border">
+                </div>
+                <div class="w-1/3 pl-2 pr-8">
+                    <label class="w-40" for="" id="cerrada">Pregunta cerrada</label>
+                </div>
+            </div>
+            <!--Div segundo nivel-->
+            <div class="w-auto mt-4 p-2 text-center">
+                <div class="w-full" id="respuestaRadio">
+                    <div class="flex flex-wrap w-full">
+                        <div class="w-2/3 m-auto text-center">
+                            <input type="text" name="respuestas" id="respuesta2" value="" placeholder=" Respuesta:" class="w-5/6 border">
+                        </div>
+                        <div class="w-1/3 m-auto text-center">
+                            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onclick="insertarRadio();">Añadir</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full py-2">
+                    <input type="file" name="video" id="video" accept=".mp4"  value="" class="">
+                </div>
+                <div class="w-full mt-4 ml-56 mb-4">
+                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" id="cancelar2" onclick="document.getElementById('preguntaCerrada').hidden=true;"> Cancelar </button>
+                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" id="agregar2"> Agregar </button>
+                </div>
+            </div>
+        </form>
+        <!--</form>-->
+    </div>
+    
+    <!--Preguntas-->
+    <div id="contedorPreguntas">
+
+    </div>
+
+    <script src="insertar.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
